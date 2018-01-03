@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  phalcon:
+    container_name: "phalcon-app"
+    image: mileschou/phalcon:7.1-cli
+    volumes:
+      - ./phalcon-app:/home/phalcon-app
+      - ./install_yaml.sh:/home/install_yaml.sh
+    working_dir: /home/phalcon-app
+    tty: true
+    # command: bash -c "sh /home/install_yaml.sh && php -a"
