@@ -1,0 +1,14 @@
+version: "3.0"
+services:
+  beanstalkd:
+    image: schickling/beanstalkd
+    ports:
+      - 11300:11300/tcp
+  console:
+    image: ohmcoe/beanstalk_console
+    ports:
+      - 11000:11000/tcp
+    environment:
+      - APACHE_PORT=11000
+      - BEANSTALKD_HOST=beanstalkd
+      - BEANSTALKD_PORT=11300
