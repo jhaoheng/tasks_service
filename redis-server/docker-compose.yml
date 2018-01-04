@@ -1,0 +1,17 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379:tcp 
+    container_name: redis
+
+  redis-admin:
+    container_name: redis-admin
+    build: ./redis-admin
+    image: redis-commander  
+    links: 
+      - redis
+    ports:
+      - 8081:8081/tcp
+    command: redis-commander --redis-host redis
