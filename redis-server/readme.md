@@ -31,3 +31,13 @@
 
 ## zset type
 ![img5](./img/zsetType.png)
+
+# 過期事件監聽
+
+1. redis.conf 的 'notify-keyspace-events' 設定為 'Ex'
+    - 或者啟動 redis-server 時 ex : `redis-server --notify-keyspace-events Ex`
+2. client_1, listen : `redis-cli subscribe __keyevent@0__:expired`
+3. client_2, 
+    - `redis-cli set {key} {value}`
+    - `redis-cli expire {key} {second}` 
+5. client_1 will get expired event
