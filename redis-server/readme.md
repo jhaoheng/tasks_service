@@ -7,5 +7,25 @@
     - 如果要接收外部的 redis，請設定 ip。注意 : 
         1. redis-server，conf 裏的 `protected-mode no`
         2. docker-compose.yml 中的 'redis' 改為 redis-server ip
-2. `docker-compose up -d`
+2. `docker-compose up -d` : 請注意若要連接外部的 redis-server，一定要將 redis-server 的 `--protected-mode` 設定為 no
+    - ex : 啟動服務器 : `redis-server --protected-mode no`
+    - 或者在 redis conf 中進行更改
 3. browser : `localhost:8081`
+
+
+# type in admin
+
+## string type
+![img1](./img/stringType.png)
+
+## hash type
+![img2](./img/hashType.png)
+
+## list type
+![img3](./img/listType.png)
+
+## set type
+![img4](./img/setType.png)
+
+## zset type
+![img5](./img/zsetType.png)
