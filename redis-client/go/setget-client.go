@@ -42,7 +42,7 @@ func main() {
   jsonData, _ := json.Marshal(p)
 
   Set("Person", jsonData, 0)
-  Get("Person")
+  Get("Person1")
 }
 
 /*
@@ -60,6 +60,14 @@ func Get(key string) (val interface{}) {
   statusCmd := redisClient.Get(key)
   log.Println("get : ", statusCmd)
 
+  jsonEncode, _ := statusCmd.Bytes()
+
+  jsonDecode := map[string]interface{}{}
+  json.Unmarshal(jsonEncode, &jsonDecode)
+  log.Println("get : ", jsonDecode)
+  if len(jsonDecode) == 0 {
+    log.Println("No Find value at this key")
+  }
   return
 }
 
