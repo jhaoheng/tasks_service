@@ -4,6 +4,7 @@ import (
   "log"
   // "sync/atomic"
   // "time"
+  "encoding/json"
 
   "github.com/go-redis/redis"
 )
@@ -24,7 +25,12 @@ Subscribe ...
 */
 func Subscribe(client *redis.Client) {
 
+  // keyspace 是以操作指令相關
+  // keyevent 是以事件相關
+  // pubsub := cient.Subscribe("__key*@0__:*") // 訂閱 space&event (使用 key) 的所有操作事件(使用 *)
+  // pubsub := client.Subscribe("__keyspace@0__:*")
   pubsub := client.Subscribe("__keyevent@0__:expired")
+
   defer pubsub.Close()
 
   for {
@@ -40,6 +46,7 @@ func Subscribe(client *redis.Client) {
       log.Println("error : ", err)
     } else {
       log.Println(msgi)
+      Get(client, msgi.Payload)
     }
 
     // switch msg := msgi.(type) {
@@ -52,4 +59,22 @@ func Subscribe(client *redis.Client) {
     //   log.Println("waiting...")
     // }
   }
+}
+
+/*
+Get ...
+*/
+func Get(client *redis.Client, key string) {
+  statusCmd := client.Get(key)
+  log.Println("key is : ", key, ", get : ", statusCmd)
+
+  jsonEncode, _ := statusCmd.Bytes()
+
+  jsonDecode := map[string]interface{}{}
+  json.Unmarshal(jsonEncode, &jsonDecode)
+  log.Println("get : ", jsonDecode)
+  // if len(jsonDecode) == 0 {
+  //   log.Println("No Find value at this key")
+  // }
+  return
 }
