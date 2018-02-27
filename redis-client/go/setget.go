@@ -41,8 +41,10 @@ func main() {
   }
   jsonData, _ := json.Marshal(p)
 
-  Set("Person", jsonData, 0)
-  Get("Person1")
+  var expiration time.Duration
+  expiration = 0 * 1000000000         // convert to second
+  Set("Person", jsonData, expiration) // 0 is keep
+  Get("Person")
 }
 
 /*
