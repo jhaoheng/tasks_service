@@ -1,0 +1,15 @@
+version: "3.2"
+services:  
+  memcached:
+    image: memcached
+    ports:
+      - 11211:11211/tcp
+    container_name: memcached
+    restart: always
+  console:
+    build: .
+    image: phpmemcachedadmin:v1.3
+    ports:
+      - 9083:9083/tcp
+    container_name: console
+    restart: always
