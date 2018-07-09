@@ -1,0 +1,22 @@
+version: "3.2"
+services:
+  etcd-browser:
+    image: jhaoheng/etcd-browser:latest
+    container_name: etcd-browser
+    environment:
+      - ETCD_HOST= # your etcd addr
+      - ETCD_PORT= # your etcd api port
+    #   - AUTH_USER=
+    #   - AUTH_PASS=
+    #   - SERVER_PORT=
+    #   - ETCDCTL_CA_FILE=
+    #   - ETCDCTL_KEY_FILE=
+    #   - ETCDCTL_CERT_FILE=
+    ports:
+      - 8000:8000
+    networks:
+      - etcd_default
+networks:
+  etcd_default:
+    external:
+      name: etcd_default
