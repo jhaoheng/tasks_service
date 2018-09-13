@@ -1,3 +1,6 @@
+# conf default set
+- requirepass
+
 # use
 
 > image : https://hub.docker.com/_/redis/

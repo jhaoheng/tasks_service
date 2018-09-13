@@ -17,4 +17,7 @@ services:
       - redis
     ports:
       - 8081:8081/tcp
-    command: redis-commander --redis-host redis
+    environment:
+      - redishost=redis
+      - redispassword=foobared
+    command: sh -c "/usr/local/bin/redis-commander --redis-host $$redishost --redis-password $$redispassword" 
