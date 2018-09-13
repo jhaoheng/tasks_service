@@ -1,5 +1,5 @@
 # synopsis
 
-- support beanstalkd , redis server  
+- support beanstalkd , redis, mongodb  
 - go / php client operation
 
