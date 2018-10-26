@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   redis:
     image: redis
@@ -11,13 +11,14 @@ services:
 
   redis-admin:
     container_name: redis-admin
-    build: ./redis-admin
-    image: redis-commander  
+    image: rediscommander/redis-commander
+    working_dir: /redis-commander/bin
     links: 
       - redis
     ports:
       - 8081:8081/tcp
     environment:
-      - redishost=redis
-      - redispassword=foobared
-    command: sh -c "/usr/local/bin/redis-commander --redis-host $$redishost --redis-password $$redispassword" 
+      - host=redis
+      - password=foobared
+      - db=0
+    command: sh -c "/usr/local/bin/redis-commander --redis-host $$host --redis-password $$password --redis-db 0" 
